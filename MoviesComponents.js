@@ -18,6 +18,7 @@ function MoviesComponents() {
 
   return (
     <section className="main-container">
+     <div style={{fontSize: "40px", color: "green"}}> {(movie.length === 0) ? <h3>Loading...</h3> : ``}</div>
       {sortedMovies.map((movie) => (
         <article key={movie.id} className="articles">
           <header className="main-headings">
