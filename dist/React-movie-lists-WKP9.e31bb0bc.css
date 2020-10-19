@@ -1,0 +1,57 @@
+body {
+    background-color: #fef6e4;
+  }
+  
+  .container {
+    background-color: #f2eef5;
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+  }
+  
+  h1{
+    text-transform: uppercase;
+    font-size: 30px;
+    text-shadow: 2px 2px 1px #ff6e6c;
+  }
+  .heading {
+    text-align: center;
+    font-size: 25px;
+  }
+  
+  .main-container {
+    background-color:#f3d2c1;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  
+  .main-headings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .articles {
+    padding: 20px;
+    background-color: #FFFFFF;
+    margin: 23px;
+    border-radius: 10px;
+    box-shadow: 5px 10px 10px #1f1235, 10px 10px 20px #ff6e6c;
+  }
+  
+  .articles:hover {
+    transform: translate(-4px, 2px);
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+  }
+  
+  .produced {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .produced p {
+    margin-right: 30px;
+  }
+
+/*# sourceMappingURL=/React-movie-lists-WKP9.e31bb0bc.css.map */

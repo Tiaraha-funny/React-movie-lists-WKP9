@@ -1,0 +1,26 @@
+{
+  "name": "react-movie-lists-wkp9",
+  "version": "1.0.0",
+  "description": "Redoing this weekend project 9 for practising",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tiaraha-funny/React-movie-lists-WKP9.git"
+  },
+  "author": "Peta Jeannie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tiaraha-funny/React-movie-lists-WKP9/issues"
+  },
+  "homepage": "https://github.com/Tiaraha-funny/React-movie-lists-WKP9#readme",
+  "dependencies": {
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ]
+}
