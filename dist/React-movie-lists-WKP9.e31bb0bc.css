@@ -54,4 +54,12 @@ body {
     margin-right: 30px;
   }
 
+  input {
+    padding: 16px;
+    border: 1px solid pink;
+    border-radius: 6px;
+    outline: pink;
+    margin: 16px;
+  }
+
 /*# sourceMappingURL=/React-movie-lists-WKP9.e31bb0bc.css.map */

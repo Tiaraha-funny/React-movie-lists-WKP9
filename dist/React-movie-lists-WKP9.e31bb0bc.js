@@ -28285,7 +28285,117 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"Headers.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Headers() {
+  return /*#__PURE__*/_react.default.createElement("header", {
+    className: "heading"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement("svg", {
+    style: {
+      marginRight: "20px",
+      marginTop: "20px"
+    },
+    className: "w-6 h-6",
+    fill: "white",
+    width: "30px",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+  })), "Studio Ghibli Movies", /*#__PURE__*/_react.default.createElement("svg", {
+    style: {
+      marginLeft: "20px",
+      marginTop: "20px"
+    },
+    className: "w-6 h-6",
+    fill: "white",
+    width: "30px",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+  }))), /*#__PURE__*/_react.default.createElement("p", null, "Ranked from the best to worst"));
+}
+
+var _default = Headers;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"InputFilter.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function InputFilter({
+  movie
+}) {
+  const filterMovie = movie.filter(movie => movie.title.toLowerCase().includes(movie.toLowerCase()));
+  return /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("label", null, "Search movie:", /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    onChange: filterMovie,
+    name: "movie",
+    placeholder: "Search your movie you like"
+  })));
+}
+
+var _default = InputFilter;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"moving.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Moving;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Moving({
+  movie,
+  handleDeleteClick,
+  handleUnlikeClick,
+  handlelikeClick
+}) {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn like",
+    id: movie.id,
+    onClick: () => handlelikeClick(movie.id)
+  }, "Like"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn unlike",
+    id: movie.id,
+    onClick: () => handleUnlikeClick(movie.id)
+  }, "Unlike"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn delete",
+    id: movie.id,
+    onClick: () => handleDeleteClick(movie.id)
+  }, "Delete"));
+}
+},{"react":"node_modules/react/index.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -28367,7 +28477,13 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _InputFilter = _interopRequireDefault(require("./InputFilter"));
+
+var _moving = _interopRequireDefault(require("./moving"));
+
 require("./index.css");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -28375,16 +28491,38 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function MoviesComponents() {
   const [movie, setMovie] = (0, _react.useState)([]);
+  const [like, setLike] = (0, _react.useState)(0);
   (0, _react.useEffect)(() => {
     async function fetchMovies() {
       const response = await fetch("https://ghibliapi.herokuapp.com/films");
       const result = await response.json();
-      console.log(result);
       setMovie(result);
     }
 
     fetchMovies();
   }, []);
+
+  const handlelikeClick = id => {
+    console.log("I like it");
+    const findId = movie.find(like => like.id === id);
+    const increase = findId.rt_score++;
+    setLike(increase);
+  };
+
+  const handleUnlikeClick = id => {
+    console.log("I don't like it");
+    const findId = movie.find(like => like.id === id);
+    const decrease = findId.rt_score--;
+    setLike(decrease);
+  };
+
+  const handleDeleteClick = id => {
+    console.log("I need to delete this");
+    const filterIdToKeep = movie.filter(like => like.id !== id);
+    console.log(filterIdToKeep);
+    setMovie(filterIdToKeep);
+  };
+
   const sortedMovies = movie.sort((a, b) => b.rt_score - a.rt_score);
   return /*#__PURE__*/_react.default.createElement("section", {
     className: "main-container"
@@ -28393,19 +28531,34 @@ function MoviesComponents() {
       fontSize: "40px",
       color: "green"
     }
-  }, " ", movie.length === 0 ? /*#__PURE__*/_react.default.createElement("h3", null, "Loading...") : ``), sortedMovies.map(movie => /*#__PURE__*/_react.default.createElement("article", {
+  }, " ", movie.length === 0 ? /*#__PURE__*/_react.default.createElement("h3", null, "Loading...") : ``), /*#__PURE__*/_react.default.createElement(_InputFilter.default, {
+    movie: movie
+  }), sortedMovies.map(movie => /*#__PURE__*/_react.default.createElement("article", {
     key: movie.id,
     className: "articles"
   }, /*#__PURE__*/_react.default.createElement("header", {
     className: "main-headings"
   }, /*#__PURE__*/_react.default.createElement("h2", null, movie.title), /*#__PURE__*/_react.default.createElement("p", null, "Release on: ", /*#__PURE__*/_react.default.createElement("b", null, movie.release_date)), /*#__PURE__*/_react.default.createElement("p", null, "Score: ", /*#__PURE__*/_react.default.createElement("b", null, movie.rt_score))), /*#__PURE__*/_react.default.createElement("p", null, movie.description), /*#__PURE__*/_react.default.createElement("div", {
     className: "produced"
-  }, /*#__PURE__*/_react.default.createElement("p", null, movie.director), /*#__PURE__*/_react.default.createElement("p", null, movie.producer)))));
+  }, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("b", {
+    style: {
+      color: "pink"
+    }
+  }, "Director:"), " ", movie.director), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("b", {
+    style: {
+      color: "pink"
+    }
+  }, "Producer:"), " ", movie.producer)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_moving.default, {
+    handleDeleteClick: handleDeleteClick,
+    handlelikeClick: handlelikeClick,
+    handleUnlikeClick: handleUnlikeClick,
+    movie: movie
+  })), /*#__PURE__*/_react.default.createElement("b", null, "Your score is changing: ", movie.rt_score))));
 }
 
 var _default = MoviesComponents;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./index.css":"index.css"}],"MovieApp.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./InputFilter":"InputFilter.js","./moving":"moving.js","./index.css":"index.css"}],"MovieApp.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28415,51 +28568,19 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _Headers = _interopRequireDefault(require("./Headers"));
+
 var _MoviesComponents = _interopRequireDefault(require("./MoviesComponents.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function MovieListApp() {
-  return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("header", {
-    className: "heading"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement("svg", {
-    style: {
-      marginRight: "20px",
-      marginTop: "20px"
-    },
-    className: "w-6 h-6",
-    fill: "white",
-    width: "30px",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/_react.default.createElement("path", {
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeWidth: "2",
-    d: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-  })), "Studio Ghibli Movies", /*#__PURE__*/_react.default.createElement("svg", {
-    style: {
-      marginLeft: "20px",
-      marginTop: "20px"
-    },
-    className: "w-6 h-6",
-    fill: "white",
-    width: "30px",
-    stroke: "currentColor",
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/_react.default.createElement("path", {
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeWidth: "2",
-    d: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-  }))), /*#__PURE__*/_react.default.createElement("p", null, "Ranked from the best to worst")), /*#__PURE__*/_react.default.createElement(_MoviesComponents.default, null));
+  return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement(_Headers.default, null), /*#__PURE__*/_react.default.createElement(_MoviesComponents.default, null));
 }
 
 var _default = MovieListApp;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./MoviesComponents.js":"MoviesComponents.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Headers":"Headers.js","./MoviesComponents.js":"MoviesComponents.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -28470,6 +28591,7 @@ var _MovieApp = _interopRequireDefault(require("./MovieApp"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//Api key: 00cc8076e871d622a8ff2452eaa31fdb
 _reactDom.default.render( /*#__PURE__*/_react.default.createElement(_MovieApp.default, null), document.getElementById("root"));
 },{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./MovieApp":"MovieApp.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -28499,7 +28621,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61785" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64624" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
