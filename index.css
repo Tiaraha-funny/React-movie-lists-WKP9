@@ -54,10 +54,35 @@ body {
     margin-right: 30px;
   }
 
+  label {
+    font-size: 30px;
+    padding-left: 30px;
+  }
+
   input {
     padding: 16px;
     border: 1px solid pink;
     border-radius: 6px;
     outline: pink;
     margin: 16px;
+  }
+
+  button {
+    background-color: #f3d2c1;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  i {
+    color: green;
+    font-size: 30px;
+  }
+
+  .btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }

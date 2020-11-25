@@ -1,20 +1,16 @@
 import React from "react";
 
-function InputFilter( { movie } ) {
-  const filterMovie = movie.filter((movie) =>
-    movie.title.toLowerCase().includes(movie.toLowerCase())
-  );
+function InputFilter({ handleInputFiltering, filter }) {
   return (
     <form>
-      <label>
-        Search movie:
-        <input
-          type="text"
-          onChange={filterMovie}
-          name="movie"
-          placeholder="Search your movie you like"
-        />
-      </label>
+      <label>Search movie:</label>
+      <input
+        type="text"
+        onChange={handleInputFiltering}
+        value={filter}
+        name="movie"
+        placeholder="Search your movie you like"
+      />
     </form>
   );
 }

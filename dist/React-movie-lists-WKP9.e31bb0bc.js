@@ -28350,52 +28350,27 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function InputFilter({
-  movie
+  handleInputFiltering,
+  filter
 }) {
-  const filterMovie = movie.filter(movie => movie.title.toLowerCase().includes(movie.toLowerCase()));
-  return /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("label", null, "Search movie:", /*#__PURE__*/_react.default.createElement("input", {
+  return /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("label", null, "Search movie:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
-    onChange: filterMovie,
+    onChange: handleInputFiltering,
+    value: filter,
     name: "movie",
     placeholder: "Search your movie you like"
-  })));
+  }));
 }
 
 var _default = InputFilter;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"moving.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = Moving;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Moving({
-  movie,
-  handleDeleteClick,
-  handleUnlikeClick,
-  handlelikeClick
-}) {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn like",
-    id: movie.id,
-    onClick: () => handlelikeClick(movie.id)
-  }, "Like"), /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn unlike",
-    id: movie.id,
-    onClick: () => handleUnlikeClick(movie.id)
-  }, "Unlike"), /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn delete",
-    id: movie.id,
-    onClick: () => handleDeleteClick(movie.id)
-  }, "Delete"));
-}
-},{"react":"node_modules/react/index.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"like.svg":[function(require,module,exports) {
+module.exports = "/like.d841d513.svg";
+},{}],"deleted.svg":[function(require,module,exports) {
+module.exports = "/deleted.4e98bf79.svg";
+},{}],"dislike.svg":[function(require,module,exports) {
+module.exports = "/dislike.4530a268.svg";
+},{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -28467,7 +28442,55 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"MoviesComponents.js":[function(require,module,exports) {
+},{"_css_loader":"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"moving.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Moving;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _like = _interopRequireDefault(require("./like.svg"));
+
+var _deleted = _interopRequireDefault(require("./deleted.svg"));
+
+var _dislike = _interopRequireDefault(require("./dislike.svg"));
+
+require("./index.css");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Moving({
+  movie,
+  handleDeleteClick,
+  handleUnlikeClick,
+  handlelikeClick
+}) {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "btns"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn like",
+    id: movie.id,
+    onClick: () => handlelikeClick(movie.id)
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _like.default
+  }), "Like"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn unlike",
+    id: movie.id,
+    onClick: () => handleUnlikeClick(movie.id)
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _dislike.default
+  }), "Unlike"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn delete",
+    id: movie.id,
+    onClick: () => handleDeleteClick(movie.id)
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _deleted.default
+  }), "Delete"));
+}
+},{"react":"node_modules/react/index.js","./like.svg":"like.svg","./deleted.svg":"deleted.svg","./dislike.svg":"dislike.svg","./index.css":"index.css"}],"MoviesComponents.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28492,6 +28515,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function MoviesComponents() {
   const [movie, setMovie] = (0, _react.useState)([]);
   const [like, setLike] = (0, _react.useState)(0);
+  const [filter, setFilter] = (0, _react.useState)([]);
   (0, _react.useEffect)(() => {
     async function fetchMovies() {
       const response = await fetch("https://ghibliapi.herokuapp.com/films");
@@ -28524,6 +28548,11 @@ function MoviesComponents() {
   };
 
   const sortedMovies = movie.sort((a, b) => b.rt_score - a.rt_score);
+
+  const handleInputFiltering = e => {
+    setFilter(e.target.value);
+  };
+
   return /*#__PURE__*/_react.default.createElement("section", {
     className: "main-container"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -28532,8 +28561,9 @@ function MoviesComponents() {
       color: "green"
     }
   }, " ", movie.length === 0 ? /*#__PURE__*/_react.default.createElement("h3", null, "Loading...") : ``), /*#__PURE__*/_react.default.createElement(_InputFilter.default, {
-    movie: movie
-  }), sortedMovies.map(movie => /*#__PURE__*/_react.default.createElement("article", {
+    value: filter,
+    handleInputFiltering: handleInputFiltering
+  }), sortedMovies.filter(movie => movie.title.toLowerCase().includes(filter)).map(movie => /*#__PURE__*/_react.default.createElement("article", {
     key: movie.id,
     className: "articles"
   }, /*#__PURE__*/_react.default.createElement("header", {
@@ -28553,7 +28583,7 @@ function MoviesComponents() {
     handlelikeClick: handlelikeClick,
     handleUnlikeClick: handleUnlikeClick,
     movie: movie
-  })), /*#__PURE__*/_react.default.createElement("b", null, "Your score is changing: ", movie.rt_score))));
+  })), /*#__PURE__*/_react.default.createElement("b", null, "Your score is changing: ", /*#__PURE__*/_react.default.createElement("i", null, " ", movie.rt_score, " ")))));
 }
 
 var _default = MoviesComponents;
@@ -28621,7 +28651,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64624" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54891" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
